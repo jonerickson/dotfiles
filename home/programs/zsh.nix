@@ -6,21 +6,14 @@
     
     # Let Home Manager handle basic shell configuration
     shellAliases = {
-      # Basic system aliases
       ll = "ls -lah";
       la = "ls -la";
       l = "ls -l";
       grep = "grep --color=auto";
       ".." = "cd ..";
       "..." = "cd ../..";
-
-      # Your existing aliases from .zshrc
       art = "php artisan $@";
       code = "cd ~/Code";
-      gcm = "git checkout master";
-      gcs = "git checkout staging";
-      gcd = "git checkout develop";
-      grd = "git rebase origin/develop";
     };
 
     # Source your existing .zshrc for complex integrations

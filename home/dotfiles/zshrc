@@ -106,12 +106,6 @@ export PATH="$HOME/.poetry/bin:$PATH"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias art='php artisan $@'
-alias code='cd ~/Code'
-alias gcm='git checkout master'
-alias gcs='git checkout staging'
-alias gcd='git checkout develop'
-alias grd='git rebase origin/develop'
 
 # Laravel Herd
 export HERD_PHP_84_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/84/"

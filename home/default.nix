@@ -3,17 +3,12 @@
 {
   # Import other configuration modules
   imports = [
+    ./programs/git.nix
     ./programs/zsh.nix
-    # Add other program configurations here as you create them
-    # ./programs/git.nix
-    # ./programs/tmux.nix
-    # ./programs/neovim.nix
   ];
 
-  # Enable Home Manager to manage itself
   programs.home-manager.enable = true;
 
-  # Basic packages you want installed
   home.packages = with pkgs; [
     # Development tools
     git
@@ -24,9 +19,6 @@
     htop
     tree
     jq
-    
-    # Add your preferred packages here
-    # pkgs.unstable.some-newer-package  # Access unstable packages like this
   ];
 
   # Environment variables
