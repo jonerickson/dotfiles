@@ -1,4 +1,6 @@
-{ ... }: let
+{ ... }:
+
+let
 in {
   networking.applicationFirewall.enable = true;
   networking.applicationFirewall.enableStealthMode = true;

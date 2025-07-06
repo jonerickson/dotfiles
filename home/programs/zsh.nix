@@ -3,7 +3,10 @@
 {
   programs.zsh = {
     enable = true;
-    
+    enableCompletion = true;
+    syntaxHighlighting.enable = true;
+    autosuggestion.enable = true;
+
     # Let Home Manager handle basic shell configuration
     shellAliases = {
       ll = "ls -lah";
@@ -46,10 +49,24 @@
       setopt HIST_VERIFY
     '';
 
-    # Disable Oh My Zsh in Home Manager since your .zshrc handles it
-    oh-my-zsh.enable = false;
+    oh-my-zsh = {
+      enable = true;
+      theme = "robbyrussell";
+      plugins = [
+        "poetry"
+        "git"
+        "brew"
+        "macos"
+        "docker"
+        "docker-compose"
+        "npm"
+        "yarn"
+        "composer"
+        "laravel"
+        "symfony"
+      ];
+    };
   };
 
-  # Place your existing .zshrc as a backup/source file
   home.file.".zshrc_original".source = ../dotfiles/zshrc;
 }

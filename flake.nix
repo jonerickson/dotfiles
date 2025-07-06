@@ -1,30 +1,41 @@
 {
   description = "Flake-based Home Manager config for macOS";
-  
+
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
-    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixos-unstable";
-    
+    flake-utils.url = "github:numtide/flake-utils";
+
+    nixpkgs-stable.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs/master";
+
+    nixos-stable.url = "github:nixos/nixpkgs/nixos-24.05";
+    nixos-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
     darwin = {
       url = "github:LnL7/nix-darwin/master";
-      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
-    
+
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
-      inputs.nixpkgs.follows = "nixpkgs";
+      url = "github:nix-community/home-manager";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
+    };
+
+    nix-homebrew = {
+      url = "github:zhaofengli/nix-homebrew";
+      inputs.nixpkgs.follows = "nixpkgs-unstable";
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, darwin, home-manager, ... }:
+  outputs = { self, nixpkgs, nixpkgs-unstable, darwin, home-manager, nix-homebrew, ... }:
     let
       system = "x86_64-darwin";
       username = "jonerickson";
-      
+
       pkgs = import nixpkgs {
         inherit system;
         config = {
-          allowUnfree = true;  # Enable if you need proprietary software
+          allowUnfree = true;
         };
         overlays = [
           (final: prev: {
@@ -38,7 +49,7 @@
     in {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        
+
         modules = [
           ./home/default.nix
           {
@@ -50,15 +61,35 @@
           }
         ];
       };
-      
+
       darwinConfigurations.${username} = darwin.lib.darwinSystem {
         inherit system;
+
+        specialArgs = {
+          inherit username;
+        };
+
         modules = [
           home-manager.darwinModules.home-manager
+          nix-homebrew.darwinModules.nix-homebrew
+          ./modules/home-manager.nix
           {
-            home-manager.useGlobalPkgs = true;
-            home-manager.useUserPackages = true;
             home-manager.users.${username} = import ./home/default.nix;
+
+            networking = {
+              hostName = username;
+              localHostName = username;
+              computerName = "Jon's MacBook Pro";
+            };
+
+            homebrew.enable = true;
+            homebrew.casks = [
+              "discord"
+              "google-chrome"
+              "postman"
+              "spotify"
+              "zoom"
+            ];
           }
         ];
       };
