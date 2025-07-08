@@ -1,7 +1,6 @@
 { config, pkgs, username, ... }:
 
 {
-  # Import other configuration modules
   imports = [
     ./programs/dev.nix
     ./programs/git.nix
@@ -24,9 +23,8 @@
     jq
   ];
 
-  # Environment variables
   home.sessionVariables = {
-    EDITOR = "nano";  # or your preferred editor
+    EDITOR = "nano";
     BROWSER = "open";
   };
 

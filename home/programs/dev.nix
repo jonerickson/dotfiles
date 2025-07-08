@@ -4,11 +4,14 @@
   home.packages = with pkgs; [
     jetbrains.phpstorm
 
-    nodePackages.nodemon
+    nodejs_22
     nodePackages.typescript
     nodePackages.ts-node
     nodePackages.eslint
     nodePackages.prettier
+    nodePackages.nodemon
+    nodePackages.yarn
+    nodePackages.pnpm
 
     python3
     poetry
@@ -52,6 +55,7 @@
     PATH = lib.strings.concatStringsSep ":" [
       "${config.home.homeDirectory}/.local/bin"
       "${config.home.homeDirectory}/.poetry/bin"
+      "${config.home.homeDirectory}/.npm-global/bin"
     ];
   };
 
@@ -90,9 +94,9 @@
       prefix=${config.home.homeDirectory}/.npm-global
       cache=${config.home.homeDirectory}/.npm-cache
       tmp=${config.home.homeDirectory}/.npm-tmp
-      init.author.name=Jon Erickson
-      init.author.email=jon@deschutesdesigngroup.com
-      init.license=MIT
+      init-author-name=Jon Erickson
+      init-author-email=jon@deschutesdesigngroup.com
+      init-license=MIT
       save-exact=true
     '';
 
