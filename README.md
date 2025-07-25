@@ -3,5 +3,5 @@
 ## Run Nix flake
 
 ```bash
-nix run .#homeConfigurations.jonerickson.activationPackage
+home-manager switch --flake .#jonerickson
 ```

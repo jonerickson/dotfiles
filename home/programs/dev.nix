@@ -13,6 +13,8 @@
     nodePackages.yarn
     nodePackages.pnpm
 
+    ruby_3_3
+
     python3
     poetry
     pyenv
@@ -32,6 +34,8 @@
 
     docker
     docker-compose
+
+    wp-cli
 
     gnumake
     cmake
