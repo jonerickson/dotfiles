@@ -14,6 +14,7 @@
     nodePackages.pnpm
 
     ruby_3_3
+    cocoapods
 
     python3
     poetry
@@ -95,7 +96,6 @@
     '';
 
     ".npmrc".text = ''
-      prefix=${config.home.homeDirectory}/.npm-global
       cache=${config.home.homeDirectory}/.npm-cache
       tmp=${config.home.homeDirectory}/.npm-tmp
       init-author-name=Jon Erickson

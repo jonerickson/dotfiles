@@ -20,13 +20,15 @@
     };
 
     # Source your existing .zshrc for complex integrations
-    initExtra = ''
+    initContent = ''
+      # Ensure Nix profile takes precedence over system binaries
+      export PATH="$HOME/.nix-profile/bin:/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin:$PATH"
+
       # Source your existing .zshrc for tool-specific configurations
       if [[ -f "$HOME/.zshrc_original" ]]; then
         source "$HOME/.zshrc_original"
       fi
 
-      # Additional Home Manager managed configuration
       # Custom functions
       mkcd() {
         mkdir -p "$1" && cd "$1"
