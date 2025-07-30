@@ -64,6 +64,13 @@
     ];
   };
 
+  home.file.".nvm".source = pkgs.fetchFromGitHub {
+    owner = "nvm-sh";
+    repo = "nvm";
+    rev = "v0.39.7";
+    sha256 = "0zsd325zqscnxdmggclxbghzj7xpqlvi4vb8gfdf7pf5nk4c7ln2";
+  };
+
   home.file = {
     ".php-cs-fixer.php".text = ''
       <?php
