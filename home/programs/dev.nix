@@ -1,24 +1,33 @@
 { config, pkgs, lib, ... }:
 
 {
+  nixpkgs.config.allowUnfree = true;
+
   home.packages = with pkgs; [
+    php
+    php.packages.composer
+
     jetbrains.phpstorm
 
     nodejs_22
-    nodePackages.typescript
-    nodePackages.ts-node
-    nodePackages.eslint
-    nodePackages.prettier
-    nodePackages.nodemon
     nodePackages.yarn
     nodePackages.pnpm
+    bun
+
+    # Use lib.hiPrio to give prettier higher priority over composer's LICENSE
+    (lib.hiPrio prettier)
 
     ruby_3_3
     cocoapods
 
     python3
+    python3Packages.pip
+    python3Packages.virtualenv
     poetry
     pyenv
+    python3Packages.black
+    python3Packages.flake8
+    python3Packages.pytest
 
     mysql80
     postgresql_15
@@ -32,11 +41,14 @@
     yq
     httpie
     postman
+    mkcert
+    ngrok
 
     docker
     docker-compose
 
-    wp-cli
+    # Use lib.lowPrio to avoid collision with php
+    (lib.lowPrio wp-cli)
 
     gnumake
     cmake
@@ -52,16 +64,54 @@
 
     unzip
     p7zip
+
+    # Additional web dev essentials
+    openssh
+    rsync
+    watchman
+    imagemagick
+    ffmpeg
+
+    # Browser automation
+    chromedriver
+
+    # Text editors (backup options)
+    nano
+    vim
   ];
 
   home.sessionVariables = {
+    COMPOSER_HOME = "${config.home.homeDirectory}/.composer";
     POETRY_HOME = "${config.home.homeDirectory}/.poetry";
     POETRY_CACHE_DIR = "${config.home.homeDirectory}/.cache/poetry";
     PATH = lib.strings.concatStringsSep ":" [
       "${config.home.homeDirectory}/.local/bin"
+      "${config.home.homeDirectory}/.composer/vendor/bin"
       "${config.home.homeDirectory}/.poetry/bin"
-      "${config.home.homeDirectory}/.npm-global/bin"
+      "${config.home.homeDirectory}/.npm-global/node_modules/.bin"
     ];
+  };
+
+  home.file.".composer/composer.json".text = builtins.toJSON {
+    "require" = {
+        "laravel/pint" = "^1.22";
+        "friendsofphp/php-cs-fixer" = "^3.75";
+        "phpstan/phpstan" = "^2.1";
+        "squizlabs/php_codesniffer" = "*";
+        "wp-coding-standards/wpcs" = "^3.1";
+        "laravel/installer" = "^4.5";
+        "symfony/cli" = "^5.4";
+        "phpunit/phpunit" = "^11.0";
+        "orchestra/testbench" = "^10.0";
+    };
+    "require-dev" = {
+        "dealerdirect/phpcodesniffer-composer-installer" = "^1.0";
+    };
+    "config" = {
+        "allow-plugins" = {
+            "dealerdirect/phpcodesniffer-composer-installer" = true;
+        };
+    };
   };
 
   home.file.".nvm".source = pkgs.fetchFromGitHub {
@@ -109,7 +159,35 @@
       init-author-email=jon@deschutesdesigngroup.com
       init-license=MIT
       save-exact=true
+      prefix=${config.home.homeDirectory}/.npm-global
     '';
+
+    ".npm-global/package.json".text = builtins.toJSON {
+      "name" = "global-packages";
+      "version" = "1.0.0";
+      "description" = "Global NPM packages";
+      "dependencies" = {
+        "@vue/cli" = "^5.0";
+        "create-react-app" = "^5.0";
+        "typescript" = "^5.7";
+        "ts-node" = "^10.9";
+        "eslint" = "^9.18";
+        "prettier" = "^3.4";
+        "nodemon" = "^3.1";
+        "pm2" = "^5.4";
+        "npm-check-updates" = "^17.1";
+        "serve" = "^14.2";
+        "vite" = "^6.0";
+        "concurrently" = "^9.1";
+        "cross-env" = "^7.0";
+        "dotenv-cli" = "^7.4";
+        "jest" = "^30.0";
+        "vitest" = "^2.1";
+        "cypress" = "^14.5";
+        "playwright" = "^1.50";
+        "mintlify" = "^4.2";
+      };
+    };
 
     ".pylintrc".text = ''
       [MASTER]
@@ -164,4 +242,16 @@
       trim_trailing_whitespace = false
     '';
   };
+
+  # Run composer global update after activation to ensure all packages are installed
+  home.activation.composerGlobalInstall = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    $DRY_RUN_CMD ${pkgs.php.packages.composer}/bin/composer global update --no-interaction --quiet || true
+  '';
+
+  # Install NPM global packages
+  home.activation.npmGlobalInstall = lib.hm.dag.entryAfter ["writeBoundary"] ''
+    export PATH="${pkgs.nodejs_22}/bin:$PATH"
+    $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/.npm-global
+    $DRY_RUN_CMD cd ${config.home.homeDirectory}/.npm-global && ${pkgs.nodejs_22}/bin/npm install --production --no-audit --no-fund --quiet || true
+  '';
 }
