@@ -21,6 +21,11 @@
 
     # Source your existing .zshrc for complex integrations
     initContent = ''
+      # Load Nix daemon environment (multi-user installation)
+      if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
+        . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
+      fi
+
       # Ensure Nix profile takes precedence over system binaries
       export PATH="$HOME/.nix-profile/bin:/run/current-system/sw/bin:/etc/profiles/per-user/$USER/bin:$PATH"
 

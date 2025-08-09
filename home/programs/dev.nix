@@ -94,23 +94,23 @@
 
   home.file.".composer/composer.json".text = builtins.toJSON {
     "require" = {
-        "laravel/pint" = "^1.22";
-        "friendsofphp/php-cs-fixer" = "^3.75";
-        "phpstan/phpstan" = "^2.1";
-        "squizlabs/php_codesniffer" = "*";
-        "wp-coding-standards/wpcs" = "^3.1";
-        "laravel/installer" = "^4.5";
-        "symfony/cli" = "^5.4";
-        "phpunit/phpunit" = "^11.0";
-        "orchestra/testbench" = "^10.0";
+      "friendsofphp/php-cs-fixer" = "^3.75";
+      "laravel/installer" = "^5.17";
+      "laravel/pint" = "^1.22";
+      "pestphp/pest" = "^3.8.2";
+      "phpstan/phpstan" = "^2.1";
+      "squizlabs/php_codesniffer" = "*";
+      "wp-coding-standards/wpcs" = "^3.1";
     };
     "require-dev" = {
-        "dealerdirect/phpcodesniffer-composer-installer" = "^1.0";
+      "dealerdirect/phpcodesniffer-composer-installer" = "^1.0";
     };
     "config" = {
-        "allow-plugins" = {
-            "dealerdirect/phpcodesniffer-composer-installer" = true;
-        };
+      "allow-plugins" = {
+        "dealerdirect/phpcodesniffer-composer-installer" = true;
+        "pestphp/pest-plugin" = true;
+        "php-http/discovery" = true;
+      };
     };
   };
 
@@ -167,25 +167,26 @@
       "version" = "1.0.0";
       "description" = "Global NPM packages";
       "dependencies" = {
+        "@anthropic-ai/claude-code" = "^1.0.72";
         "@vue/cli" = "^5.0";
-        "create-react-app" = "^5.0";
-        "typescript" = "^5.7";
-        "ts-node" = "^10.9";
-        "eslint" = "^9.18";
-        "prettier" = "^3.4";
-        "nodemon" = "^3.1";
-        "pm2" = "^5.4";
-        "npm-check-updates" = "^17.1";
-        "serve" = "^14.2";
-        "vite" = "^6.0";
         "concurrently" = "^9.1";
+        "create-react-app" = "^5.0";
         "cross-env" = "^7.0";
-        "dotenv-cli" = "^7.4";
-        "jest" = "^30.0";
-        "vitest" = "^2.1";
         "cypress" = "^14.5";
-        "playwright" = "^1.50";
+        "dotenv-cli" = "^7.4";
+        "eslint" = "^9.18";
+        "jest" = "^30.0";
         "mintlify" = "^4.2";
+        "nodemon" = "^3.1";
+        "npm-check-updates" = "^17.1";
+        "playwright" = "^1.50";
+        "pm2" = "^5.4";
+        "prettier" = "^3.4";
+        "serve" = "^14.2";
+        "ts-node" = "^10.9";
+        "typescript" = "^5.7";
+        "vite" = "^6.0";
+        "vitest" = "^2.1";
       };
     };
 
