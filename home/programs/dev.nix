@@ -100,6 +100,7 @@
       "pestphp/pest" = "^3.8.2";
       "phpstan/phpstan" = "^2.1";
       "squizlabs/php_codesniffer" = "*";
+      "statamic/cli" = "*";
       "wp-coding-standards/wpcs" = "^3.1";
     };
     "require-dev" = {
