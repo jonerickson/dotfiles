@@ -20,7 +20,7 @@
     };
 
     # Source your existing .zshrc for complex integrations
-    initContent = ''
+    initExtra = ''
       # Load Nix daemon environment (multi-user installation)
       if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh

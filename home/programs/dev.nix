@@ -6,26 +6,27 @@
 }:
 
 {
-  nixpkgs.config.allowUnfree = true;
-
   home = {
     packages = with pkgs; [
+      # IDE
+      jetbrains.phpstorm
+
+      # PHP
       php
       php.packages.composer
 
-      jetbrains.phpstorm
-
+      # Node
       nodejs_22
       nodePackages.yarn
       nodePackages.pnpm
+      nodePackages.prettier
       bun
 
-      # Use lib.hiPrio to give prettier higher priority over composer's LICENSE
-      (lib.hiPrio prettier)
-
+      # Ruby
       ruby_3_3
       cocoapods
 
+      # Python
       python3
       python3Packages.pip
       python3Packages.virtualenv
@@ -35,53 +36,52 @@
       python3Packages.flake8
       python3Packages.pytest
 
+      # Databases
       mysql80
       postgresql_15
       redis
       sqlite
       dbeaver-bin
 
+      # Docker
+      docker
+      docker-compose
+
+      # Tools
+      gnumake
+      cmake
+      pkg-config
+      ripgrep
+      fd
+      fzf
+      bat
       curl
       wget
-      jq
-      yq
       httpie
       postman
       mkcert
       ngrok
 
-      docker
-      docker-compose
-
-      # Use lib.lowPrio to avoid collision with php
-      (lib.lowPrio wp-cli)
-
-      gnumake
-      cmake
-      pkg-config
-
-      ripgrep
-      fd
-      fzf
-      bat
-
+      # System
+      jq
+      yq
       htop
       tree
 
+      # Zip
       unzip
       p7zip
 
-      # Additional web dev essentials
+      # Additional Dev Tools
       openssh
       rsync
-      watchman
       imagemagick
       ffmpeg
 
-      # Browser automation
+      # Browser Automation
       chromedriver
 
-      # Text editors (backup options)
+      # Text Editors
       nano
       vim
     ];

@@ -2,6 +2,7 @@
 
 {
   home.packages = with pkgs; [
+    git
     git-lfs
     gitui
     gh
