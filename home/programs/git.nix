@@ -1,8 +1,16 @@
 { config, pkgs, ... }:
 
 {
+  home.packages = with pkgs; [
+    git-lfs
+    gitui
+    gh
+    git-filter-repo
+  ];
+
   programs.git = {
     enable = true;
+    lfs.enable = true;
 
     userName = "Jon Erickson";
     userEmail = "jon@deschutesdesigngroup.com";
@@ -104,15 +112,6 @@
       "*.orig"
     ];
   };
-
-  home.packages = with pkgs; [
-    git-lfs
-    gitui
-    gh
-    git-filter-repo
-  ];
-
-  programs.git.lfs.enable = true;
 
   programs.gh = {
     enable = true;

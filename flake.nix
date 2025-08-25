@@ -1,5 +1,5 @@
 {
-  description = "Flake-based Home Manager config for macOS";
+  description = "Flake-based Home Manager config for Jon Erickson's macOS";
 
   inputs = {
     flake-utils.url = "github:numtide/flake-utils";
@@ -26,7 +26,16 @@
     };
   };
 
-  outputs = { self, nixpkgs, nixpkgs-unstable, darwin, home-manager, nix-homebrew, ... }:
+  outputs =
+    {
+      self,
+      nixpkgs,
+      nixpkgs-unstable,
+      darwin,
+      home-manager,
+      nix-homebrew,
+      ...
+    }:
     let
       system = "x86_64-darwin";
       username = "jonerickson";
@@ -45,7 +54,8 @@
           })
         ];
       };
-    in {
+    in
+    {
       homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
 

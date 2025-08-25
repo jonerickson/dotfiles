@@ -1,4 +1,9 @@
-{ config, pkgs, username, ... }:
+{
+  config,
+  pkgs,
+  username,
+  ...
+}:
 
 {
   imports = [
@@ -9,34 +14,29 @@
 
   programs.home-manager.enable = true;
 
-  home.stateVersion = "24.05";
-  home.homeDirectory = "/Users/${username}";
-  home.packages = with pkgs; [
-    # Development tools
-    git
-    curl
-    wget
+  home = {
+    stateVersion = "24.05";
+    homeDirectory = "/Users/${username}";
 
-    # System utilities
-    htop
-    tree
-    jq
-  ];
+    packages = with pkgs; [
+      # Development tools
+      git
+      curl
+      wget
 
-  home.sessionVariables = {
-    EDITOR = "nano";
-    BROWSER = "open";
-  };
+      # System utilities
+      htop
+      tree
+      jq
 
-  # Dotfiles that don't have dedicated Home Manager options
-  home.file = {
-    # Example: if you have custom config files
-    # ".config/some-app/config.toml".source = ./dotfiles/some-app-config.toml;
+      # Nix
+      nixfmt-rfc-style
+    ];
 
-    # You can also use text content directly
-    # ".config/example/config.txt".text = ''
-    #   Some configuration content
-    # '';
+    sessionVariables = {
+      EDITOR = "nano";
+      BROWSER = "open";
+    };
   };
 
   # XDG configuration (for apps that follow XDG standards)
