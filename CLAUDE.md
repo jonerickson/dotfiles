@@ -10,12 +10,13 @@ This is a Nix-based dotfiles repository using Home Manager and nix-darwin for ma
 
 ### Apply Home Manager Configuration
 ```bash
-home-manager switch --flake .#jonerickson
+nix run .#homeConfigurations.jonerickson.activationPackage
 ```
 
 ### Apply Darwin (System) Configuration
 ```bash
-darwin-rebuild switch --flake .#jonerickson
+nix build .#darwinConfigurations.jonerickson.system
+sudo ./result/sw/bin/darwin-rebuild activate
 ```
 
 ### Update Flake Inputs
@@ -58,6 +59,13 @@ The configuration includes comprehensive development tooling:
 - **Tools**: Docker, wp-cli, various CLI utilities
 - **Editors**: PhpStorm (via Nix), with support for VS Code and other editors
 
+### Secrets Management
+- Uses sops-nix for encrypted secrets management
+- Age encryption with user-managed keys
+- Secrets stored in encrypted `home/secrets.yaml` (safe for VCS)
+- Automatic Composer auth.json generation from encrypted secrets
+- Conditional configuration ensures system works with or without secrets
+
 ### Dotfile Management
 - Custom configuration files are managed through `home.file` attribute
 - Includes configurations for PHP CS Fixer, EditorConfig, npm, Poetry, and Pylint
@@ -65,10 +73,24 @@ The configuration includes comprehensive development tooling:
 
 ## Development Workflow
 
+### Regular Configuration Changes
 When modifying configurations:
 1. Edit the relevant `.nix` files
 2. Test changes with `nix flake check`
-3. Apply changes with appropriate switch command
+3. Apply changes with appropriate command:
+   - Home Manager: `nix run .#homeConfigurations.jonerickson.activationPackage`
+   - System: `nix build .#darwinConfigurations.jonerickson.system && sudo ./result/sw/bin/darwin-rebuild activate`
 4. Commit changes to version control
 
-The flake uses multiple nixpkgs channels (stable, unstable, master) to provide flexibility in package versions while maintaining stability where needed.
+### Working with Secrets
+When adding or updating secrets:
+1. Edit secrets: `sops home/secrets.yaml`
+2. Update Nix configuration to reference new secrets
+3. Apply Home Manager configuration to activate changes
+4. Commit encrypted secrets file (never commit unencrypted)
+
+### Important Notes
+- The flake uses multiple nixpkgs channels (stable, unstable) for package flexibility
+- Configuration is conditional - works with or without secrets
+- Always test with `nix flake check` before applying changes
+- Secrets are managed outside of Nix store for security

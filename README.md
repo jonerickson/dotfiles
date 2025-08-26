@@ -1,3 +1,4 @@
+
 # Dotfiles
 
 Nix-based dotfiles configuration using Home Manager and nix-darwin for macOS system management.
@@ -6,51 +7,149 @@ Nix-based dotfiles configuration using Home Manager and nix-darwin for macOS sys
 
 ### 1. Install Nix
 Install the Nix package manager with flakes support:
-```bash
+```bash  
 curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
-```
+```  
 
 After installation, restart your terminal or source the environment:
-```bash
+
+```bash  
 source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
-```
+```  
 
-### 2. Enable Flakes (if not already enabled)
-Add to your `~/.config/nix/nix.conf` or `/etc/nix/nix.conf`:
-```
-experimental-features = nix-command flakes
-```
+### 2. Enable Flakes
+If not already enabled, add to your `~/.config/nix/nix.conf` or `/etc/nix/nix.conf`:
+```  
+experimental-features = nix-command flakes  
+```  
 
-### 3. Clone Repository
+### 3. Install Git (Temporary)
+Since Home Manager will manage Git, install it temporarily to clone the repository. If you already have the Git CLI tool installed, you can skip this step.
 ```bash
+nix-env -iA nixpkgs.git
+```
+
+### 4. Clone Repository
+```bash  
 git clone https://github.com/yourusername/dotfiles.git
 cd dotfiles
-```
+```  
 
 ## Installation
 
 ### First-time Setup
-1. **Apply Home Manager Configuration**:
+#### 1. Remove Temporary Git and Apply Home Manager Configuration:
 ```bash
-nix run .#homeConfigurations.jonerickson.activationPackage
-```
+# If installed earlier, remove temporary Git installation to avoid conflicts
+nix-env -e git
 
-2. **Apply System Configuration (Darwin)**:
-```bash
+# Apply Home Manager configuration (includes Git)
+nix run .#homeConfigurations.jonerickson.activationPackage
+```  
+
+#### 2. Apply System Configuration (Darwin):
+```bash  
 nix build .#darwinConfigurations.jonerickson.system
-sudo ./result/sw/bin/darwin-rebuild activate 
-```
+sudo ./result/sw/bin/darwin-rebuild activate
+```  
 
 **Important**: Make sure all changes are committed before building: `git add -A && git commit -m "Initial setup"`
 
-### Subsequent Updates
-After making changes to the configuration:
-```bash
+#### 3. Setup Secrets Management (Optional)
+If you need to manage secrets, follow these steps:
+
+##### Option A: Fresh Install (Generate New Key)
+1. **Generate a new age encryption key**:
+```bash  
+mkdir -p ~/.config/sops/ageage-keygen > ~/.config/sops/age/keys.txt
+```  
+
+2. **Get your public key and update configuration**:
+```bash  
+age-keygen -y ~/.config/sops/age/keys.txt
+```  
+
+3. **Update `.sops.yaml`** with your new public key (replace the existing key).
+
+4. **Create and encrypt your secrets file**:
+```bash  
+# Create unencrypted secrets file  
+cp home/secrets.yaml.example home/secrets.yaml  # if example exists  
+# OR manually create home/secrets.yaml with your secrets  
+  
+# Encrypt the file  
+sops -e -i home/secrets.yaml  
+  
+# Commit the encrypted file  
+git add home/secrets.yaml .sops.yaml  
+git commit -m "Add encrypted secrets"  
+```  
+
+##### Option B: Migrating from Existing Setup
+1. **Copy your existing age key** from your old machine:
+```bash  
+mkdir -p ~/.config/sops/age
+# Copy your existing keys.txt file to ~/.config/sops/age/keys.txt
+```  
+
+2. **The existing `.sops.yaml` and encrypted `home/secrets.yaml`** should already work with your key.
+
+3. **Test decryption**:
+```bash  
+sops -d home/secrets.yaml
+```  
+
+#### Secrets File Structure
+The `home/secrets.yaml` file should contain:
+```yaml  
+composer:
+  whizzy-username: your-username
+  whizzy-password: your-password
+  filament-username: your-username
+  filament-password: your-password
+  spark-username: your-username
+  spark-password: your-password
+  github-token: your-github-token  
+```  
+
+**Note**: Do not commit an unencrypted version `home/secrets.yaml` to your VCS. You should only commit the encrypted version of your secrets.
+
+## Subsequent Updates
+
+### Regular User Configuration Updates
+After making changes to the user configuration:
+```bash  
 git add -A
-git commit -m "Update configuration"
+git commit -m "Update user configuration"
+nix run .#homeConfigurations.jonerickson.activationPackage
+```  
+
+### Regular System Configuration Updates
+After making changes to the system configuration:
+```bash  
+git add -A
+git commit -m "Update system configuration"
 nix build .#darwinConfigurations.jonerickson.system
 sudo ./result/sw/bin/darwin-rebuild activate
-```
+```  
+
+### Updating Secrets
+To update encrypted secrets:
+```bash  
+# Edit secrets (will decrypt, open editor, then re-encrypt)  
+sops home/secrets.yaml  
+  
+# Or manually decrypt, edit, and re-encrypt  
+sops -d home/secrets.yaml > temp_secrets.yaml  
+
+# Edit temp_secrets.yaml  
+sops -e -i temp_secrets.yaml  
+mv temp_secrets.yaml home/secrets.yaml  
+  
+# Commit changes  
+git add home/secrets.yaml  
+git commit -m "Update secrets"  
+```  
 
 ## What's Included
 
@@ -94,19 +193,19 @@ sudo ./result/sw/bin/darwin-rebuild activate
 ## Maintenance
 
 ### Update Dependencies
-```bash
+```bash  
 nix flake update
-```
+```  
 
 ### Validate Configuration
-```bash
+```bash  
 nix flake check
-```
+```  
 
 ### Code Formatting
-```bash
+```bash  
 nixfmt ./**/*.nix
-```
+```  
 
 ## Structure
 

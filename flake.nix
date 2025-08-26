@@ -18,6 +18,11 @@
     nix-homebrew = {
       url = "github:zhaofengli/nix-homebrew";
     };
+
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -28,6 +33,7 @@
       darwin,
       home-manager,
       nix-homebrew,
+      sops-nix,
       ...
     }:
     let
@@ -58,14 +64,8 @@
         };
 
         modules = [
+          sops-nix.homeManagerModules.sops
           ./home/default.nix
-          {
-            home = {
-              username = username;
-              homeDirectory = "/Users/${username}";
-              stateVersion = "25.05";
-            };
-          }
         ];
       };
 

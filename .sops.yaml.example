@@ -1,0 +1,7 @@
+keys:
+  - &user # REPLACE WITH YOUR PUBLIC KEY
+creation_rules:
+  - path_regex: home/secrets\.yaml$
+    key_groups:
+    - age:
+      - *user
