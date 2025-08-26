@@ -9,6 +9,7 @@
   imports = [
     ./programs/dev.nix
     ./programs/git.nix
+    ./programs/ssh.nix
     ./programs/zsh.nix
   ];
 
