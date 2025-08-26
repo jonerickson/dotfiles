@@ -1,8 +1,3 @@
-# User configuration
-export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
-export CPPFLAGS="-I/opt/homebrew/opt/openjdk/include"
-export PATH="$PATH:$HOME/.composer/vendor/bin"
-
 # Laravel Herd
 export HERD_PHP_84_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/84/"
 
@@ -25,17 +20,16 @@ export HERD_PHP_81_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/
 export HERD_PHP_82_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/82/"
 
 # pnpm
-export PNPM_HOME="/Users/jonerickson/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
 # pnpm end
 
 # pyenv
-export PATH="$HOME/.pyenv/bin:$PATH"
-eval "$(pyenv init --path)"
-eval "$(pyenv init -)"
+#export PATH="$HOME/.pyenv/bin:$PATH"
+#eval "$(pyenv init --path)"
+#eval "$(pyenv init -)"
 
 # Created by `pipx` on 2025-06-03 21:59:01
-export PATH="$PATH:/Users/jonerickson/.local/bin"
+# export PATH="$PATH:/Users/jonerickson/.local/bin"

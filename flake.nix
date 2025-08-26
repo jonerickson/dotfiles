@@ -2,16 +2,16 @@
   description = "Flake-based Home Manager config for Jon Erickson's macOS";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-24.05-darwin";
+    nixpkgs.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
 
     darwin = {
-      url = "github:LnL7/nix-darwin/master";
+      url = "github:LnL7/nix-darwin";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.05";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -63,7 +63,7 @@
             home = {
               username = username;
               homeDirectory = "/Users/${username}";
-              stateVersion = "24.05";
+              stateVersion = "25.05";
             };
           }
         ];
@@ -79,26 +79,10 @@
         modules = [
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
+          ./modules/darwin/system.nix
+          ./modules/darwin/networking.nix
+          ./modules/darwin/homebrew.nix
           ./modules/home-manager.nix
-          {
-            home-manager.users.${username} = import ./home/default.nix;
-
-            networking = {
-              hostName = username;
-              localHostName = username;
-              computerName = "Jon's MacBook Pro";
-            };
-
-            homebrew.enable = true;
-            homebrew.casks = [
-              "discord"
-              "ghostty"
-              "google-chrome"
-              "postman"
-              "spotify"
-              "zoom"
-            ];
-          }
         ];
       };
     };

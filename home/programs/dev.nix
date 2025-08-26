@@ -19,7 +19,6 @@
       nodejs_22
       nodePackages.yarn
       nodePackages.pnpm
-      nodePackages.prettier
       bun
 
       # Ruby
@@ -88,15 +87,20 @@
 
     sessionVariables = {
       COMPOSER_HOME = "${config.home.homeDirectory}/.composer";
+      PNPM_HOME = "${config.home.homeDirectory}/Library/pnpm";
       POETRY_HOME = "${config.home.homeDirectory}/.poetry";
       POETRY_CACHE_DIR = "${config.home.homeDirectory}/.cache/poetry";
-      PATH = lib.strings.concatStringsSep ":" [
-        "${config.home.homeDirectory}/.local/bin"
-        "${config.home.homeDirectory}/.composer/vendor/bin"
-        "${config.home.homeDirectory}/.poetry/bin"
-        "${config.home.homeDirectory}/.npm-global/node_modules/.bin"
-      ];
+      PYENV_ROOT = "${config.home.homeDirectory}/.pyenv";
     };
+    
+    sessionPath = [
+      "${config.home.homeDirectory}/.composer/vendor/bin"
+      "${config.home.homeDirectory}/.local/bin"
+      "${config.home.homeDirectory}/.npm-global/bin"
+      "${config.home.homeDirectory}/.poetry/bin"
+      "${config.home.homeDirectory}/.pyenv/bin"
+      "${config.home.homeDirectory}/Library/pnpm"
+    ];
 
     # Pure write to files
     file = {
