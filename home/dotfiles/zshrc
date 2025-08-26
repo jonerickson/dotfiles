@@ -1,17 +1,15 @@
-# Laravel Herd
-export HERD_PHP_84_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/84/"
-
 # Herd injected NVM configuration
-export NVM_DIR="/Users/jonerickson/Library/Application Support/Herd/config/nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+if [ -d "/Users/jonerickson/Library/Application Support/Herd/config/nvm" ]; then
+  export NVM_DIR="/Users/jonerickson/Library/Application Support/Herd/config/nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+fi
 
 [[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
 
 # Herd injected PHP binary.
-export PATH="/Users/jonerickson/Library/Application Support/Herd/bin/":$PATH
-
-# Herd injected PHP 8.3 configuration.
-export HERD_PHP_83_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/83/"
+if [ -d "/Users/jonerickson/Library/Application Support/Herd/bin" ]; then
+  export PATH="/Users/jonerickson/Library/Application Support/Herd/bin/":$PATH
+fi
 
 # Herd injected PHP 8.1 configuration.
 export HERD_PHP_81_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/81/"
@@ -19,17 +17,8 @@ export HERD_PHP_81_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/
 # Herd injected PHP 8.2 configuration.
 export HERD_PHP_82_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/82/"
 
-# pnpm
-# case ":$PATH:" in
-#   *":$PNPM_HOME:"*) ;;
-#   *) export PATH="$PNPM_HOME:$PATH" ;;
-# esac
-# pnpm end
+# Herd injected PHP 8.3 configuration.
+export HERD_PHP_83_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/83/"
 
-# pyenv
-#export PATH="$HOME/.pyenv/bin:$PATH"
-#eval "$(pyenv init --path)"
-#eval "$(pyenv init -)"
-
-# Created by `pipx` on 2025-06-03 21:59:01
-# export PATH="$PATH:/Users/jonerickson/.local/bin"
+# Herd injected PHP 8.4 configuration.
+export HERD_PHP_84_INI_SCAN_DIR="/Users/jonerickson/Library/Application Support/Herd/config/php/84/"

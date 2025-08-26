@@ -27,15 +27,22 @@
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
       fi
 
-      # Source your existing .zshrc for tool-specific configurations
+      # Source a custom .zshrc for tool-specific configurations
       if [[ -f "$HOME/.zshrc_original" ]]; then
         source "$HOME/.zshrc_original"
       fi
 
-      # Load NVM
-      export NVM_DIR="$HOME/.nvm"
-      [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-      [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+      # Initialize pyenv
+      if command -v pyenv >/dev/null 2>&1; then
+        eval "$(pyenv init --path)"
+        eval "$(pyenv init -)"
+      fi
+
+      # Load nvm
+      if [ -n "$NVM_DIR" ]; then
+        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
+        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
+      fi
 
       # Custom functions
       mkcd() {

@@ -54,12 +54,42 @@ sudo ./result/sw/bin/darwin-rebuild activate
 
 ## What's Included
 
-- **Development Tools**: PHP, Node.js, Python, Ruby with package managers
-- **Databases**: MySQL, PostgreSQL, Redis, SQLite with GUI tools  
-- **CLI Utilities**: ripgrep, fd, fzf, bat, htop, and more
-- **Git Configuration**: Aliases, global gitignore, GitHub CLI
-- **Shell Setup**: Zsh with Oh My Zsh, syntax highlighting, autosuggestions
-- **Editor Configs**: EditorConfig, PHP CS Fixer, Pylint, ESLint/Prettier
+### Development Tools
+- **PHP**: PHP 8.4, Composer with Laravel, Pest, PHPStan, PHP CS Fixer
+- **Node.js**: Node.js 22, npm, yarn, pnpm, Bun with global packages (ESLint, Prettier, TypeScript, Vite, etc.)
+- **Python**: Python 3, pyenv, poetry, pip, pipx, virtualenv, black, flake8, pytest
+- **Ruby**: Ruby 3.3, CocoaPods
+
+### Databases & Storage
+- **Databases**: MySQL 8.0, PostgreSQL 15, Redis, SQLite
+- **GUI Tools**: DBeaver
+
+### IDEs & Editors
+- **IDEs**: PhpStorm (via Homebrew), nano, vim
+- **Editor Configs**: EditorConfig, PHP CS Fixer, Pylint configuration
+
+### Development Infrastructure
+- **Containers**: Docker, Docker Compose
+- **Build Tools**: GNU Make, CMake, pkg-config
+- **Version Control**: Git with LFS, GitHub CLI, git-filter-repo
+- **Web Tools**: curl, wget, HTTPie, Postman, mkcert, ngrok, chromedriver
+
+### CLI Utilities
+- **Search & Navigation**: ripgrep, fd, fzf, bat, tree
+- **System**: htop, jq, yq
+- **Archives**: unzip, p7zip
+- **Media**: ImageMagick, FFmpeg
+- **Network**: OpenSSH, rsync
+
+### Shell & Environment
+- **Shell**: Zsh with Oh My Zsh, syntax highlighting, autosuggestions
+- **Themes & Plugins**: Robbyrussell theme, Git, Brew, macOS, Docker, npm, Composer, Laravel plugins
+- **Package Management**: Nix with flakes support, nixfmt for code formatting
+
+### macOS Applications (Homebrew Casks)
+- **Productivity**: 1Password, Raycast, Slack, Discord
+- **Development**: Docker, Google Chrome, Sublime Text
+- **Terminal**: Ghostty
 
 ## Maintenance
 
@@ -71,6 +101,11 @@ nix flake update
 ### Validate Configuration
 ```bash
 nix flake check
+```
+
+### Code Formatting
+```bash
+nixfmt ./**/*.nix
 ```
 
 ## Structure

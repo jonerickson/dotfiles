@@ -27,13 +27,14 @@
 
       # Python
       python3
-      python3Packages.pip
-      python3Packages.virtualenv
       poetry
       pyenv
       python3Packages.black
       python3Packages.flake8
       python3Packages.pytest
+      python3Packages.pip
+      python3Packages.pipx
+      python3Packages.virtualenv
 
       # Databases
       mysql80
@@ -87,12 +88,13 @@
 
     sessionVariables = {
       COMPOSER_HOME = "${config.home.homeDirectory}/.composer";
+      NVM_DIR = "${config.home.homeDirectory}/.nvm";
       PNPM_HOME = "${config.home.homeDirectory}/Library/pnpm";
       POETRY_HOME = "${config.home.homeDirectory}/.poetry";
       POETRY_CACHE_DIR = "${config.home.homeDirectory}/.cache/poetry";
       PYENV_ROOT = "${config.home.homeDirectory}/.pyenv";
     };
-    
+
     sessionPath = [
       "${config.home.homeDirectory}/.composer/vendor/bin"
       "${config.home.homeDirectory}/.local/bin"

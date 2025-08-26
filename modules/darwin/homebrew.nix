@@ -14,7 +14,7 @@
       "postman"
       "raycast"
       "slack"
-      "sublime-text"	
+      "sublime-text"
     ];
   };
 }
