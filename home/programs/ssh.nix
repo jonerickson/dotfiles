@@ -11,28 +11,29 @@
     # Client
     compression = true;
     controlMaster = "auto";
-    controlPath = "~/.ssh/master-%r@%h:%p";
+    controlPath = "~/.ssh/master-%n-%r@%h:%p";
     controlPersist = "10m";
 
     # Config
     extraConfig = ''
       AddKeysToAgent yes
-      IdentitiesOnly yes
     '';
 
     # Hosts
     matchBlocks = {
-      "github" = {
+      "gh-personal" = {
         hostname = "github.com";
-        user = "jonerickson";
+        user = "git";
         identityFile = "~/.ssh/id_rsa";
+        identitiesOnly = true;
         port = 22;
       };
 
-      "github-bkjg" = {
+      "gh-bkjg" = {
         hostname = "github.com";
-        user = "jonericksonbkjg";
-        identityFile = "~/.ssh/id_rsa";
+        user = "git";
+        identityFile = "~/.ssh/id_rsa_bkjg";
+        identitiesOnly = true;
         port = 22;
       };
     };

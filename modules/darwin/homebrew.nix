@@ -15,6 +15,7 @@
       "raycast"
       "slack"
       "sublime-text"
+      "tableplus"
     ];
   };
 }
