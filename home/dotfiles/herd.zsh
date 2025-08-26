@@ -1,11 +1,3 @@
-# Herd injected NVM configuration
-if [ -d "/Users/jonerickson/Library/Application Support/Herd/config/nvm" ]; then
-  export NVM_DIR="/Users/jonerickson/Library/Application Support/Herd/config/nvm"
-  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-fi
-
-[[ -f "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh" ]] && builtin source "/Applications/Herd.app/Contents/Resources/config/shell/zshrc.zsh"
-
 # Herd injected PHP binary.
 if [ -d "/Users/jonerickson/Library/Application Support/Herd/bin" ]; then
   export PATH="/Users/jonerickson/Library/Application Support/Herd/bin/":$PATH

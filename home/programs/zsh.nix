@@ -1,7 +1,6 @@
 { config, pkgs, ... }:
 
 {
-
   programs.zsh = {
     enable = true;
     enableCompletion = true;
@@ -20,16 +19,15 @@
       code = "cd ~/Code";
     };
 
-    # Source your existing .zshrc for complex integrations
     initContent = ''
       # Load Nix daemon environment (multi-user installation)
       if [ -e /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
       fi
 
-      # Source a custom .zshrc for tool-specific configurations
-      if [[ -f "$HOME/.zshrc_original" ]]; then
-        source "$HOME/.zshrc_original"
+      # Source custom zsh files
+      if [[ -f "$HOME/.herd" ]]; then
+        source "$HOME/.herd"
       fi
 
       # Initialize pyenv
@@ -85,5 +83,6 @@
     };
   };
 
-  home.file.".zshrc_original".source = ../dotfiles/zshrc;
+  # Write custom zsh files
+  home.file.".herd".source = ../dotfiles/herd.zsh;
 }
