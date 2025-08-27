@@ -14,6 +14,7 @@
       "postman"
       "raycast"
       "slack"
+      "spotify"
       "sublime-text"
       "tableplus"
     ];

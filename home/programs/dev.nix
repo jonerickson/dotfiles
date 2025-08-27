@@ -129,7 +129,8 @@
         };
       };
 
-    } // lib.optionalAttrs (config.sops.secrets ? "composer/whizzy-username") {
+    }
+    // lib.optionalAttrs (config.sops.secrets ? "composer/whizzy-username") {
       ".composer/auth.json.template" = {
         text = builtins.toJSON {
           http-basic = {
@@ -298,7 +299,8 @@
         $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/.npm-global
         $DRY_RUN_CMD cd ${config.home.homeDirectory}/.npm-global && ${pkgs.nodejs_22}/bin/npm install --production --no-audit --no-fund --quiet || true
       '';
-    } // lib.optionalAttrs (config.sops.secrets ? "composer/whizzy-username") {
+    }
+    // lib.optionalAttrs (config.sops.secrets ? "composer/whizzy-username") {
       # Generate composer auth.json from template with secrets
       composerAuthGenerate = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         if [[ -f "${config.home.homeDirectory}/.composer/auth.json.template" ]]; then
