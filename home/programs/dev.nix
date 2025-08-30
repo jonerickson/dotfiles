@@ -219,6 +219,7 @@
           "mintlify" = "^4.2";
           "nodemon" = "^3.1";
           "npm-check-updates" = "^17.1";
+          "opencode-ai" = "^0.4";
           "playwright" = "^1.50";
           "pm2" = "^5.4";
           "prettier" = "^3.4";
