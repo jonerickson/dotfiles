@@ -18,6 +18,7 @@
       "google-chrome"
       "phpstorm"
       "postman"
+      "pycharm"
       "raycast"
       "slack"
       "spotify"

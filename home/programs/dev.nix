@@ -26,7 +26,6 @@
       cocoapods
 
       # Python
-      python3
       poetry
       pyenv
       python3Packages.black
