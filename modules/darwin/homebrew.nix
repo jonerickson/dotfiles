@@ -3,6 +3,9 @@
 {
   homebrew = {
     enable = true;
+    brews = [
+      "heroku/brew/heroku"
+    ];
     casks = [
       "1password"
       "1password-cli"
