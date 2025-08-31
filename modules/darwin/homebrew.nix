@@ -3,6 +3,9 @@
 {
   homebrew = {
     enable = true;
+    taps = [
+      "heroku/brew"
+    ];
     brews = [
       "heroku/brew/heroku"
     ];
