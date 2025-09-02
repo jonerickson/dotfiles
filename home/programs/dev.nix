@@ -145,6 +145,10 @@
               username = "@SPARK_USERNAME@";
               password = "@SPARK_PASSWORD@";
             };
+            "nova.laravel.com" = {
+              username = "@NOVA_USERNAME@";
+              password = "@NOVA_PASSWORD@";
+            };
           };
           github-oauth = {
             "github.com" = "@GITHUB_TOKEN@";
@@ -313,6 +317,8 @@
             -e "s|@FILAMENT_PASSWORD@|$(cat ${config.sops.secrets."composer/filament-password".path})|g" \
             -e "s|@SPARK_USERNAME@|$(cat ${config.sops.secrets."composer/spark-username".path})|g" \
             -e "s|@SPARK_PASSWORD@|$(cat ${config.sops.secrets."composer/spark-password".path})|g" \
+            -e "s|@NOVA_USERNAME@|$(cat ${config.sops.secrets."composer/nova-username".path})|g" \
+            -e "s|@NOVA_PASSWORD@|$(cat ${config.sops.secrets."composer/nova-password".path})|g" \
             -e "s|@GITHUB_TOKEN@|$(cat ${config.sops.secrets."composer/github-token".path})|g" \
             "${config.home.homeDirectory}/.composer/auth.json.template" > "${config.home.homeDirectory}/.composer/auth.json"
         fi
