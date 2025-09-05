@@ -37,10 +37,8 @@
       fi
 
       # Load nvm
-      if [ -n "$NVM_DIR" ]; then
-        [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"
-        [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"
-      fi
+      export NVM_DIR="''${XDG_CONFIG_HOME:-$HOME/.nvm}/nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
 
       # Custom functions
       mkcd() {

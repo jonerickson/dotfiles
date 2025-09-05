@@ -8,6 +8,7 @@
     ];
     brews = [
       "heroku/brew/heroku"
+      "postgresql"
     ];
     casks = [
       "1password"
