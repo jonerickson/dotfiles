@@ -18,15 +18,15 @@ source /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
 ```  
 
 ### 2. Enable Flakes
-If not already enabled, add to your `~/.config/nix/nix.conf` or `/etc/nix/nix.conf`:
+If not already enabled, add flake support to `/etc/nix/nix.custom.conf`:
 ```  
 experimental-features = nix-command flakes  
 ```  
 
-### 3. Install Git (Temporary)
-Since Home Manager will manage Git, install it temporarily to clone the repository. If you already have the Git CLI tool installed, you can skip this step.
+### 3. Install Git 
+Since Home Manager will manage Git, install it temporarily to clone the repository. This will only install `git` for the current shell. Once exited, `git` will no longer be in your `PATH`.
 ```bash
-nix-env -iA nixpkgs.git
+nix-shell -p git
 ```
 
 ### 4. Clone Repository
@@ -38,12 +38,8 @@ cd dotfiles
 ## Installation
 
 ### First-time Setup
-#### 1. Remove Temporary Git and Apply Home Manager Configuration:
 ```bash
-# If installed earlier, remove temporary Git installation to avoid conflicts
-nix-env -e git
-
-# Apply Home Manager configuration (includes Git)
+# Apply Home Manager configuration
 nix run .#homeConfigurations.jonerickson.activationPackage
 ```  
 
