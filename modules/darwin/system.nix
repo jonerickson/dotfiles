@@ -5,18 +5,15 @@
   system.stateVersion = 6;
   system.primaryUser = username;
 
-  # Nix configuration
-  nix = {
-    settings = {
-      experimental-features = [
-        "nix-command"
-        "flakes"
-      ];
-      trusted-users = [
-        "root"
-        username
-      ];
-    };
+  # Nix configuration - let Determinate manage the nix daemon
+  nix.enable = false;
+
+  # Install Homebrew
+  nix-homebrew = {
+    enable = true;
+    user = username;
+    enableRosetta = true; # Apple Silicon
+    autoMigrate = true;
   };
 
   # macOS system preferences

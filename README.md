@@ -37,7 +37,7 @@ cd dotfiles
 
 ## Installation
 
-### First-time Setup
+#### 1. Apply Home Manager Configuration:
 ```bash
 # Apply Home Manager configuration
 nix run .#homeConfigurations.jonerickson.activationPackage
@@ -45,6 +45,9 @@ nix run .#homeConfigurations.jonerickson.activationPackage
 
 #### 2. Apply System Configuration (Darwin):
 ```bash  
+# Make sure command line tools have been installed first
+xcode-select --install
+
 nix build .#darwinConfigurations.jonerickson.system
 sudo ./result/sw/bin/darwin-rebuild activate
 ```  
@@ -65,7 +68,7 @@ mkdir -p ~/.config/sops/ageage-keygen > ~/.config/sops/age/keys.txt
 age-keygen -y ~/.config/sops/age/keys.txt
 ```  
 
-3. **Update `.sops.yaml`** with your new public key (replace the existing key).
+3. **Update `.sops.yaml` with your new public key (replace the existing key)**
 
 4. **Create and encrypt your secrets file**:
 ```bash  
@@ -82,13 +85,13 @@ git commit -m "Add encrypted secrets"
 ```  
 
 ##### Option B: Migrating from Existing Setup
-1. **Copy your existing age key** from your old machine:
+1. **Copy your existing age key from your old machine**:
 ```bash  
 mkdir -p ~/.config/sops/age
 # Copy your existing keys.txt file to ~/.config/sops/age/keys.txt
 ```  
 
-2. **The existing `.sops.yaml` and encrypted `home/secrets.yaml`** should already work with your key.
+2. **The existing `.sops.yaml` and encrypted `home/secrets.yaml` should already work with your key**
 
 3. **Test decryption**:
 ```bash  

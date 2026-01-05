@@ -7,82 +7,86 @@
 
 let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
-    with pkgs.google-cloud-sdk.components; [
+    with pkgs.google-cloud-sdk.components;
+    [
       gke-gcloud-auth-plugin
     ]
   );
 in
 {
   home = {
-    packages = with pkgs; [
-      # IDE
-      jetbrains.phpstorm
+    packages =
+      with pkgs;
+      [
+        # IDE
+        jetbrains.phpstorm
 
-      # PHP
-      php
-      php.packages.composer
+        # PHP
+        php
+        php.packages.composer
 
-      # Node
-      bun
+        # Node
+        bun
 
-      # Ruby
-      ruby_3_3
-      cocoapods
+        # Ruby
+        ruby_3_3
+        cocoapods
 
-      # Python
-      poetry
-      pyenv
+        # Python
+        poetry
+        pyenv
 
-      # Databases
-      mysql80
-      redis
-      sqlite
-      dbeaver-bin
+        # Databases
+        mysql80
+        redis
+        sqlite
+        dbeaver-bin
 
-      # Docker
-      docker
-      docker-compose
+        # Docker
+        docker
+        docker-compose
 
-      # Tools
-      gnumake
-      cmake
-      pkg-config
-      ripgrep
-      fd
-      fzf
-      bat
-      curl
-      wget
-      httpie
-      postman
-      mkcert
-      ngrok
-    ] ++ [
-      gdk
+        # Tools
+        gnumake
+        cmake
+        pkg-config
+        ripgrep
+        fd
+        fzf
+        bat
+        curl
+        wget
+        httpie
+        postman
+        mkcert
+        ngrok
+      ]
+      ++ [
+        gdk
 
-      # System
-      jq
-      yq
-      htop
-      tree
+        # System
+        jq
+        yq
+        htop
+        tree
 
-      # Zip
-      unzip
-      p7zip
+        # Zip
+        unzip
+        p7zip
 
-      # Additional Dev Tools
-      openssh
-      rsync
-      imagemagick
-      ffmpeg
+        # Additional Dev Tools
+        openssh
+        rsync
+        imagemagick
+        ffmpeg
 
-      # Browser Automation
-      chromedriver
+        # Browser Automation
+        chromedriver
 
-      # Text Editors
-      nano
-      vim
-    ];
+        # Text Editors
+        nano
+        vim
+      ];
 
     sessionVariables = {
       COMPOSER_HOME = "${config.home.homeDirectory}/.composer";
