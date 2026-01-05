@@ -7,14 +7,21 @@
       "heroku/brew"
     ];
     brews = [
+      "aws-iam-authenticator"
+      "awscli"
+      "doctl"
+      "eksctl"
+      "helm"
       "heroku/brew/heroku"
-      "postgresql"
+      "kubernetes-cli"
+      "postgresql@14"
+      "stripe-cli"
     ];
     casks = [
       "1password"
       "1password-cli"
       "discord"
-      "docker"
+      "docker-desktop"
       "ghostty"
       "google-chrome"
       "phpstorm"
