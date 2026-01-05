@@ -29,10 +29,10 @@
         port = 22;
       };
 
-      "gh-bkjg" = {
+      "gh-leasecake" = {
         hostname = "github.com";
         user = "git";
-        identityFile = "~/.ssh/id_rsa_bkjg";
+        identityFile = "~/.ssh/id_leasecake";
         identitiesOnly = true;
         port = 22;
       };
