@@ -8,6 +8,7 @@
 
 {
   imports = [
+    ./programs/claude.nix
     ./programs/dev.nix
     ./programs/git.nix
     ./programs/ssh.nix
