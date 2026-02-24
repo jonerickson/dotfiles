@@ -28,6 +28,7 @@
       "discord"
       "docker-desktop"
       "ghostty"
+      "headlamp"
       "google-chrome"
       "phpstorm"
       "postman"
