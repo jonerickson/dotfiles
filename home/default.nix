@@ -22,15 +22,7 @@
     defaultSopsFile = ./secrets.yaml;
     age.keyFile = "${config.home.homeDirectory}/.config/sops/age/keys.txt";
 
-    secrets = {
-      "composer/whizzy-username" = { };
-      "composer/whizzy-password" = { };
-      "composer/filament-username" = { };
-      "composer/filament-password" = { };
-      "composer/spark-username" = { };
-      "composer/spark-password" = { };
-      "composer/github-token" = { };
-    };
+    secrets = { };
   };
 
   home = {

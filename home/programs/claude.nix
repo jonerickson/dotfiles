@@ -1,4 +1,4 @@
-{ config, lib, ... }:
+{ config, lib, pkgs, ... }:
 
 let
   marketplaces = [
@@ -16,15 +16,17 @@ let
     "sentry@claude-plugins-official"
   ];
   marketplaceCmds = builtins.concatStringsSep "\n" (
-    map (m: "claude plugin marketplace add ${m} 2>/dev/null || true") marketplaces
+    map (m: ''$CLAUDE_BIN plugin marketplace add ${m} || echo "Warning: failed to add marketplace ${m}"'') marketplaces
   );
   installCmds = builtins.concatStringsSep "\n" (
-    map (p: "claude plugin install ${p} 2>/dev/null || true") plugins
+    map (p: ''$CLAUDE_BIN plugin install ${p} || echo "Warning: failed to install plugin ${p}"'') plugins
   );
 in
 {
   home.activation.claudePlugins = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-    if command -v claude &> /dev/null; then
+    export PATH="${lib.makeBinPath [ pkgs.git ]}:$PATH"
+    CLAUDE_BIN="$HOME/.local/bin/claude"
+    if [ -x "$CLAUDE_BIN" ]; then
       ${marketplaceCmds}
       ${installCmds}
     fi

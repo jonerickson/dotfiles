@@ -128,29 +128,6 @@ in
       };
 
     }
-    // lib.optionalAttrs (config.sops.secrets ? "composer/whizzy-username") {
-      ".composer/auth.json.template" = {
-        text = builtins.toJSON {
-          http-basic = {
-            "whizzy.dev" = {
-              username = "@WHIZZY_USERNAME@";
-              password = "@WHIZZY_PASSWORD@";
-            };
-            "filament-filter-sets.composer.sh" = {
-              username = "@FILAMENT_USERNAME@";
-              password = "@FILAMENT_PASSWORD@";
-            };
-            "spark.laravel.com" = {
-              username = "@SPARK_USERNAME@";
-              password = "@SPARK_PASSWORD@";
-            };
-          };
-          github-oauth = {
-            "github.com" = "@GITHUB_TOKEN@";
-          };
-        };
-      };
-    }
     // {
 
       ".php-cs-fixer.php".text = ''
@@ -252,24 +229,6 @@ in
       composerGlobalInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
         echo "Running composer global update...."
         $DRY_RUN_CMD ${pkgs.php.packages.composer}/bin/composer global update --no-interaction || true
-      '';
-    }
-    // lib.optionalAttrs (config.sops.secrets ? "composer/whizzy-username") {
-      # Generate composer auth.json from template with secrets
-      composerAuthGenerate = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        if [[ -f "${config.home.homeDirectory}/.composer/auth.json.template" ]]; then
-          echo "Generating composer auth.json from template..."
-          $DRY_RUN_CMD mkdir -p ${config.home.homeDirectory}/.composer
-          $DRY_RUN_CMD ${pkgs.gnused}/bin/sed \
-            -e "s|@WHIZZY_USERNAME@|$(cat ${config.sops.secrets."composer/whizzy-username".path})|g" \
-            -e "s|@WHIZZY_PASSWORD@|$(cat ${config.sops.secrets."composer/whizzy-password".path})|g" \
-            -e "s|@FILAMENT_USERNAME@|$(cat ${config.sops.secrets."composer/filament-username".path})|g" \
-            -e "s|@FILAMENT_PASSWORD@|$(cat ${config.sops.secrets."composer/filament-password".path})|g" \
-            -e "s|@SPARK_USERNAME@|$(cat ${config.sops.secrets."composer/spark-username".path})|g" \
-            -e "s|@SPARK_PASSWORD@|$(cat ${config.sops.secrets."composer/spark-password".path})|g" \
-            -e "s|@GITHUB_TOKEN@|$(cat ${config.sops.secrets."composer/github-token".path})|g" \
-            "${config.home.homeDirectory}/.composer/auth.json.template" > "${config.home.homeDirectory}/.composer/auth.json"
-        fi
       '';
     };
   };
