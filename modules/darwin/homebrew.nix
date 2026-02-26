@@ -19,6 +19,7 @@
       "helm"
       "heroku/brew/heroku"
       "kubernetes-cli"
+      "php"
       "postgresql@14"
       "stripe-cli"
     ];
