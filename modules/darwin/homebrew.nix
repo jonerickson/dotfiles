@@ -10,6 +10,7 @@
     };
     taps = [
       "heroku/brew"
+      "shivammathur/php"
     ];
     brews = [
       "aws-iam-authenticator"
