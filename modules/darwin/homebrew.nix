@@ -32,6 +32,7 @@
       "ghostty"
       "headlamp"
       "google-chrome"
+      "opentofu"
       "phpstorm"
       "postman"
       "pycharm"
