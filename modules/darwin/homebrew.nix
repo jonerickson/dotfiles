@@ -20,6 +20,7 @@
       "helm"
       "heroku/brew/heroku"
       "kubernetes-cli"
+      "opentoonz"
       "php"
       "postgresql@14"
       "stripe-cli"
