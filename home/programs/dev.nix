@@ -9,6 +9,7 @@ let
   gdk = pkgs.google-cloud-sdk.withExtraComponents (
     with pkgs.google-cloud-sdk.components;
     [
+      cloud-sql-proxy
       gke-gcloud-auth-plugin
     ]
   );
