@@ -10,6 +10,7 @@
     };
     taps = [
       "heroku/brew"
+      "minio/stable"
       "shivammathur/php"
     ];
     brews = [
@@ -20,6 +21,7 @@
       "helm"
       "heroku/brew/heroku"
       "kubernetes-cli"
+      "minio/stable/mc"
       "opentofu"
       "php"
       "postgresql@14"
