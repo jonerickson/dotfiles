@@ -23,6 +23,7 @@
       "kubernetes-cli"
       "minio/stable/mc"
       "opentofu"
+      "terraform"
       "php"
       "postgresql@14"
       "stripe-cli"
