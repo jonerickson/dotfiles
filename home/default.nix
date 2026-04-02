@@ -9,8 +9,10 @@
 {
   imports = [
     ./programs/claude.nix
+    ./programs/composer.nix
     ./programs/dev.nix
     ./programs/git.nix
+    ./programs/npm.nix
     ./programs/ssh.nix
     ./programs/zsh.nix
   ];
