@@ -9,6 +9,7 @@
       cleanup = "zap";
     };
     taps = [
+      "aws/tap"
       "heroku/brew"
       "minio/stable"
       "pomerium/tap"

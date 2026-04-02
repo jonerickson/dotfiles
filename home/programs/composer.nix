@@ -25,6 +25,7 @@
           "phpstan/phpstan" = "*";
           "squizlabs/php_codesniffer" = "*";
           "statamic/cli" = "*";
+          "ergebnis/composer-normalize" = "*";
           "wp-coding-standards/wpcs" = "*";
         };
         "require-dev" = {
@@ -33,6 +34,7 @@
         "config" = {
           "allow-plugins" = {
             "dealerdirect/phpcodesniffer-composer-installer" = true;
+            "ergebnis/composer-normalize" = true;
             "pestphp/pest-plugin" = true;
             "php-http/discovery" = true;
           };
