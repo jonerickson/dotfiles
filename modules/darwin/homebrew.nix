@@ -12,6 +12,7 @@
       "heroku/brew"
       "minio/stable"
       "pomerium/tap"
+      "shivammathur/extensions"
       "shivammathur/php"
     ];
     brews = [
@@ -25,6 +26,8 @@
       "minio/stable/mc"
       "opentofu"
       "pomerium-cli"
+      "shivammathur/extensions/grpc@8.5"
+      "shivammathur/extensions/protobuf@8.5"
       "postgresql@18"
       "stripe-cli"
       "terraform"
