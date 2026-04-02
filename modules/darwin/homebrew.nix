@@ -11,6 +11,7 @@
     taps = [
       "heroku/brew"
       "minio/stable"
+      "pomerium/tap"
       "shivammathur/php"
     ];
     brews = [
@@ -23,10 +24,11 @@
       "kubernetes-cli"
       "minio/stable/mc"
       "opentofu"
-      "terraform"
       "php"
+      "pomerium-cli"
       "postgresql@14"
       "stripe-cli"
+      "terraform"
     ];
     casks = [
       "1password"
