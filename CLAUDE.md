@@ -42,21 +42,28 @@ nix flake check
 
 ### Key Configuration Files
 - `home/default.nix` - Main home configuration entry point
-- `home/programs/dev.nix` - Development tools and programming language setups
+- `home/programs/claude.nix` - Claude Code plugin and marketplace management
+- `home/programs/composer.nix` - PHP, Composer global packages, and PHP CS Fixer config
+- `home/programs/dev.nix` - Development tools, languages, and general dotfiles
 - `home/programs/git.nix` - Git configuration and related tools
+- `home/programs/npm.nix` - npm global packages (installed via nvm)
+- `home/programs/ssh.nix` - SSH configuration
 - `home/programs/zsh.nix` - Shell configuration with Oh My Zsh
 - `modules/home-manager.nix` - Home Manager module configuration
 
 ### Package Management
 - **Nix packages**: Declaratively managed in `.nix` files
 - **Homebrew casks**: GUI applications managed through nix-darwin
-- **Language-specific packages**: Managed through respective package managers (npm, composer, poetry)
+- **Composer packages**: Global PHP packages declared in `home/programs/composer.nix`, installed via activation script
+- **npm packages**: Global npm packages declared in `home/programs/npm.nix`, installed via nvm/npm activation script
+- **Claude Code plugins**: Managed declaratively in `home/programs/claude.nix`
 
 ### Development Environment
 The configuration includes comprehensive development tooling:
 - **Languages**: PHP, Node.js, Python, Ruby
-- **Databases**: MySQL, PostgreSQL, Redis, SQLite
-- **Tools**: Docker, wp-cli, various CLI utilities
+- **Databases**: MySQL, Redis, SQLite
+- **Kubernetes**: kubectl (aliased to `k`)
+- **Tools**: Docker, various CLI utilities
 - **Editors**: PhpStorm (via Nix), with support for VS Code and other editors
 
 ### Secrets Management
