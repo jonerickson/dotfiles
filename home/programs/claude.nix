@@ -6,14 +6,16 @@ let
   ];
   plugins = [
     "context7@claude-plugins-official"
-    "ralph-loop@claude-plugins-official"
     "typescript-lsp@claude-plugins-official"
     "frontend-design@claude-plugins-official"
     "laravel-boost@claude-plugins-official"
     "laravel-simplifier@laravel"
-    "figma@claude-plugins-official"
     "atlassian@claude-plugins-official"
     "sentry@claude-plugins-official"
+    "code-simplifier@claude-plugins-official"
+    "code-review@claude-plugins-official"
+    "github@claude-plugins-official"
+    "feature-dev@claude-plugins-official"
   ];
   marketplaceCmds = builtins.concatStringsSep "\n" (
     map (m: ''$CLAUDE_BIN plugin marketplace add ${m} || echo "Warning: failed to add marketplace ${m}"'') marketplaces
