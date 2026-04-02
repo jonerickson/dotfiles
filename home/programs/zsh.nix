@@ -17,6 +17,7 @@
       "..." = "cd ../..";
       art = "php artisan $@";
       code = "cd ~/Code";
+      k = "kubectl";
     };
 
     initContent = ''

@@ -43,6 +43,9 @@ in
         docker
         docker-compose
 
+        # Kubernetes
+        kubectl
+
         # Tools
         gnumake
         cmake
