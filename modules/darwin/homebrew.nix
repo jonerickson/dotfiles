@@ -24,9 +24,8 @@
       "kubernetes-cli"
       "minio/stable/mc"
       "opentofu"
-      "php"
       "pomerium-cli"
-      "postgresql@14"
+      "postgresql@18"
       "stripe-cli"
       "terraform"
     ];

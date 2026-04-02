@@ -95,6 +95,7 @@ in
     };
 
     sessionPath = [
+      "/opt/homebrew/bin"
       "${config.home.homeDirectory}/.local/bin"
       "${config.home.homeDirectory}/.poetry/bin"
       "${config.home.homeDirectory}/.pyenv/bin"
