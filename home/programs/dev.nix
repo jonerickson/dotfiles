@@ -13,7 +13,6 @@ let
       gke-gcloud-auth-plugin
     ]
   );
-
 in
 {
   home = {
@@ -22,10 +21,6 @@ in
       [
         # IDE
         jetbrains.phpstorm
-
-        # PHP
-        php
-        php.packages.composer
 
         # Node
         bun
@@ -91,14 +86,12 @@ in
       ];
 
     sessionVariables = {
-      COMPOSER_HOME = "${config.home.homeDirectory}/.composer";
       POETRY_HOME = "${config.home.homeDirectory}/.poetry";
       POETRY_CACHE_DIR = "${config.home.homeDirectory}/.cache/poetry";
       PYENV_ROOT = "${config.home.homeDirectory}/.pyenv";
     };
 
     sessionPath = [
-      "${config.home.homeDirectory}/.composer/vendor/bin"
       "${config.home.homeDirectory}/.local/bin"
       "${config.home.homeDirectory}/.poetry/bin"
       "${config.home.homeDirectory}/.pyenv/bin"
@@ -106,63 +99,6 @@ in
 
     # Pure write to files
     file = {
-      ".composer/composer.json".text = builtins.toJSON {
-        "require" = {
-          "friendsofphp/php-cs-fixer" = "^3.75";
-          "laravel/installer" = "^5.17";
-          "laravel/pint" = "^1.22";
-          "pestphp/pest" = "^3.8.2";
-          "phpstan/phpstan" = "^2.1";
-          "squizlabs/php_codesniffer" = "*";
-          "statamic/cli" = "*";
-          "wp-coding-standards/wpcs" = "^3.1";
-        };
-        "require-dev" = {
-          "dealerdirect/phpcodesniffer-composer-installer" = "^1.0";
-        };
-        "config" = {
-          "allow-plugins" = {
-            "dealerdirect/phpcodesniffer-composer-installer" = true;
-            "pestphp/pest-plugin" = true;
-            "php-http/discovery" = true;
-          };
-        };
-      };
-
-    }
-    // {
-
-      ".php-cs-fixer.php".text = ''
-        <?php
-        return (new PhpCsFixer\Config())
-            ->setRules([
-                '@PSR12' => true,
-                'array_syntax' => ['syntax' => 'short'],
-                'ordered_imports' => ['sort_algorithm' => 'alpha'],
-                'no_unused_imports' => true,
-                'not_operator_with_successor_space' => true,
-                'trailing_comma_in_multiline' => true,
-                'phpdoc_scalar' => true,
-                'unary_operator_spaces' => true,
-                'binary_operator_spaces' => true,
-                'blank_line_before_statement' => [
-                    'statements' => ['break', 'continue', 'declare', 'return', 'throw', 'try'],
-                ],
-            ])
-            ->setFinder(
-                PhpCsFixer\Finder::create()
-                    ->exclude('bootstrap/cache')
-                    ->exclude('storage')
-                    ->exclude('vendor')
-                    ->in(__DIR__)
-                    ->name('*.php')
-                    ->notName('*.blade.php')
-                    ->ignoreDotFiles(true)
-                    ->ignoreVCS(true)
-            );
-      '';
-
-
       ".pylintrc".text = ''
         [MASTER]
         load-plugins=pylint.extensions.docparams
@@ -215,16 +151,6 @@ in
         [*.md]
         trim_trailing_whitespace = false
       '';
-    };
-
-    # Home manager activation scripts
-    activation = {
-      # Run composer global update after activation to ensure all packages are installed
-      composerGlobalInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
-        echo "Running composer global update...."
-        $DRY_RUN_CMD ${pkgs.php.packages.composer}/bin/composer global update --no-interaction || true
-      '';
-
     };
   };
 }
