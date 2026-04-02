@@ -13,6 +13,7 @@ let
       gke-gcloud-auth-plugin
     ]
   );
+
 in
 {
   home = {
@@ -161,14 +162,6 @@ in
             );
       '';
 
-      ".npmrc".text = ''
-        cache=${config.home.homeDirectory}/.npm-cache
-        tmp=${config.home.homeDirectory}/.npm-tmp
-        init-author-name=Jon Erickson
-        init-author-email=jon@deschutesdesigngroup.com
-        init-license=MIT
-        save-exact=true
-      '';
 
       ".pylintrc".text = ''
         [MASTER]
@@ -231,6 +224,7 @@ in
         echo "Running composer global update...."
         $DRY_RUN_CMD ${pkgs.php.packages.composer}/bin/composer global update --no-interaction || true
       '';
+
     };
   };
 }
