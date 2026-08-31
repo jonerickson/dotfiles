@@ -29,7 +29,9 @@
       "pomerium-cli"
       "shivammathur/extensions/grpc@8.5"
       "shivammathur/extensions/protobuf@8.5"
+      "shivammathur/extensions/pcov@8.5"
       "postgresql@18"
+      "qpdf"
       "stripe-cli"
       "terraform"
     ];
