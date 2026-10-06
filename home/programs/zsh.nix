@@ -3,6 +3,7 @@
 {
   programs.zsh = {
     enable = true;
+    dotDir = config.home.homeDirectory;
     enableCompletion = true;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;

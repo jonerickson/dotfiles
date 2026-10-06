@@ -12,17 +12,19 @@
     enable = true;
     lfs.enable = true;
 
-    userName = "Jon Erickson";
-    userEmail = "jon@deschutesdesigngroup.com";
+    settings = {
+      user = {
+        name = "Jon Erickson";
+        email = "jon@deschutesdesigngroup.com";
+      };
 
-    aliases = {
-      gcm = "checkout master";
-      gcs = "checkout staging";
-      gcd = "checkout develop";
-      grd = "rebase origin/develop";
-    };
+      alias = {
+        gcm = "checkout master";
+        gcs = "checkout staging";
+        gcd = "checkout develop";
+        grd = "rebase origin/develop";
+      };
 
-    extraConfig = {
       diff.colorMoved = "default";
       init.defaultBranch = "master";
       pull.rebase = true;

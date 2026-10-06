@@ -7,34 +7,40 @@
 {
   programs.ssh = {
     enable = true;
+    enableDefaultConfig = false;
 
-    # Client
-    compression = true;
-    controlMaster = "auto";
-    controlPath = "~/.ssh/master-%n-%r@%h:%p";
-    controlPersist = "10m";
-
-    # Config
-    extraConfig = ''
-      AddKeysToAgent yes
-    '';
-
-    # Hosts
-    matchBlocks = {
+    settings = {
+      # Hosts
       "gh-personal" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_rsa";
-        identitiesOnly = true;
-        port = 22;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_rsa";
+        IdentitiesOnly = true;
+        Port = 22;
       };
 
       "gh-leasecake" = {
-        hostname = "github.com";
-        user = "git";
-        identityFile = "~/.ssh/id_leasecake";
-        identitiesOnly = true;
-        port = 22;
+        HostName = "github.com";
+        User = "git";
+        IdentityFile = "~/.ssh/id_leasecake";
+        IdentitiesOnly = true;
+        Port = 22;
+      };
+
+      # Client
+      "*" = {
+        AddKeysToAgent = "yes";
+        Compression = true;
+        ControlMaster = "auto";
+        ControlPath = "~/.ssh/master-%n-%r@%h:%p";
+        ControlPersist = "10m";
+
+        # Previously implicit Home Manager defaults
+        ForwardAgent = false;
+        HashKnownHosts = false;
+        ServerAliveCountMax = 3;
+        ServerAliveInterval = 0;
+        UserKnownHostsFile = "~/.ssh/known_hosts";
       };
     };
   };
