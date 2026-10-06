@@ -1,4 +1,9 @@
-{ config, lib, pkgs, ... }:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 let
   marketplaces = [
@@ -18,10 +23,14 @@ let
     "feature-dev@claude-plugins-official"
   ];
   marketplaceCmds = builtins.concatStringsSep "\n" (
-    map (m: ''$CLAUDE_BIN plugin marketplace add ${m} || echo "Warning: failed to add marketplace ${m}"'') marketplaces
+    map (
+      m: ''$CLAUDE_BIN plugin marketplace add ${m} || echo "Warning: failed to add marketplace ${m}"''
+    ) marketplaces
   );
   installCmds = builtins.concatStringsSep "\n" (
-    map (p: ''$CLAUDE_BIN plugin install ${p} || echo "Warning: failed to install plugin ${p}"'') plugins
+    map (
+      p: ''$CLAUDE_BIN plugin install ${p} || echo "Warning: failed to install plugin ${p}"''
+    ) plugins
   );
 in
 {

@@ -17,19 +17,19 @@ in
   # XDG_CONFIG_HOME, so brew resolves its trust store against root's home and
   # the `~/.homebrew` fallback. Seed every candidate path.
   system.activationScripts.preActivation.text = ''
-    for configHome in \
-      /var/root/.homebrew \
-      /var/root/.config/homebrew \
-      /Users/${username}/.homebrew \
-      /Users/${username}/.config/homebrew
-    do
-      mkdir -p "$configHome"
-      cat > "$configHome/trust.json" <<'TRUSTJSON'
-${builtins.toJSON { trustedtaps = trustedTaps; }}
-TRUSTJSON
-      chmod 600 "$configHome/trust.json"
-    done
-    chown -R ${username} /Users/${username}/.homebrew /Users/${username}/.config/homebrew
+        for configHome in \
+          /var/root/.homebrew \
+          /var/root/.config/homebrew \
+          /Users/${username}/.homebrew \
+          /Users/${username}/.config/homebrew
+        do
+          mkdir -p "$configHome"
+          cat > "$configHome/trust.json" <<'TRUSTJSON'
+    ${builtins.toJSON { trustedtaps = trustedTaps; }}
+    TRUSTJSON
+          chmod 600 "$configHome/trust.json"
+        done
+        chown -R ${username} /Users/${username}/.homebrew /Users/${username}/.config/homebrew
   '';
 
   homebrew = {
