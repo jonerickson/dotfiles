@@ -13,6 +13,7 @@
     ./programs/dev.nix
     ./programs/git.nix
     ./programs/npm.nix
+    ./programs/python.nix
     ./programs/ssh.nix
     ./programs/zsh.nix
   ];

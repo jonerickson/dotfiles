@@ -47,6 +47,7 @@ nix flake check
 - `home/programs/dev.nix` - Development tools, languages, and general dotfiles
 - `home/programs/git.nix` - Git configuration and related tools
 - `home/programs/npm.nix` - npm global packages (installed via nvm)
+- `home/programs/python.nix` - Python global packages (installed via pip into the pyenv global version)
 - `home/programs/ssh.nix` - SSH configuration
 - `home/programs/zsh.nix` - Shell configuration with Oh My Zsh
 - `modules/home-manager.nix` - Home Manager module configuration
@@ -56,6 +57,7 @@ nix flake check
 - **Homebrew casks**: GUI applications managed through nix-darwin
 - **Composer packages**: Global PHP packages declared in `home/programs/composer.nix`, installed via activation script
 - **npm packages**: Global npm packages declared in `home/programs/npm.nix`, installed via nvm/npm activation script
+- **Python packages**: Global Python packages declared in `home/programs/python.nix`, installed via pip into the pyenv global version by an activation script
 - **Claude Code plugins**: Managed declaratively in `home/programs/claude.nix`
 
 ### Development Environment

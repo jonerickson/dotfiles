@@ -156,11 +156,11 @@ git commit -m "Update secrets"
 ### Development Tools
 - **PHP**: PHP 8.4 and Composer via Nix, with global packages installed on activation — Laravel installer, Pest, PHPStan, Pint, PHP CS Fixer, PHP_CodeSniffer, Statamic CLI, composer-normalize, WPCS
 - **Node.js**: Bun via Nix. Node itself is managed by `nvm` outside Nix; activation installs the global packages `happy-coder`, `opencode-ai`, and `workos` against the current `nvm` default
-- **Python**: poetry and pyenv (the interpreter comes from pyenv, not Nix)
+- **Python**: poetry and pyenv (the interpreter comes from pyenv, not Nix), with global packages pip-installed into the pyenv global version on activation — openpyxl
 - **Ruby**: Ruby 3.3, CocoaPods
 
 ### Databases & Storage
-- **Databases**: MySQL 8.0, Redis, SQLite via Nix; PostgreSQL 18 via Homebrew
+- **Databases**: MySQL 8.4, Redis, SQLite via Nix; PostgreSQL 18 via Homebrew
 - **GUI Tools**: DBeaver, TablePlus
 
 ### IDEs & Editors
@@ -307,7 +307,7 @@ nixfmt ./**/*.nix
 - `flake.nix` — Inputs and outputs; defines `homeConfigurations.jonerickson` and `darwinConfigurations.jonerickson`
 - `flake.lock` — Pins every input, including the Homebrew version via `brew-src`
 - `home/default.nix` — Home Manager entrypoint; imports everything under `home/programs/`
-- `home/programs/` — Per-tool user configuration (claude, composer, dev, git, npm, ssh, zsh)
+- `home/programs/` — Per-tool user configuration (claude, composer, dev, git, npm, python, ssh, zsh)
 - `home/dotfiles/` — Literal dotfiles sourced into `$HOME` (`herd.zsh`)
 - `home/secrets.yaml` — sops-encrypted secrets; `home/secrets.yaml.example` shows the shape
 - `modules/home-manager.nix` — Wires Home Manager into the darwin configuration

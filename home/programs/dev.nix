@@ -34,7 +34,7 @@ in
         pyenv
 
         # Databases
-        mysql80
+        mysql84
         redis
         sqlite
         dbeaver-bin
