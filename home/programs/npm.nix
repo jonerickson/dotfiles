@@ -2,7 +2,7 @@
 
 let
   npmGlobalPackages = [
-    "happy-coder"
+    "happy"
     "opencode-ai"
     "workos"
   ];
@@ -11,11 +11,11 @@ in
   home = {
     file.".npmrc".text = ''
       cache=${config.home.homeDirectory}/.npm-cache
-      tmp=${config.home.homeDirectory}/.npm-tmp
       init-author-name=Jon Erickson
       init-author-email=jon@deschutesdesigngroup.com
       init-license=MIT
       save-exact=true
+      allow-scripts=happy,opencode-ai
     '';
 
     activation.npmGlobalInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

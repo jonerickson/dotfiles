@@ -14,7 +14,8 @@ in
   home = {
     activation.pythonGlobalInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
       export PYENV_ROOT="${config.home.homeDirectory}/.pyenv"
-      PYTHON_PREFIX=$(${pkgs.pyenv}/bin/pyenv prefix 2>/dev/null | cut -d: -f1)
+      # pyenv resolves prefix versions (e.g. "3.12") with awk, which the activation PATH lacks
+      PYTHON_PREFIX=$(PATH="${pkgs.gawk}/bin:$PATH" ${pkgs.pyenv}/bin/pyenv prefix | cut -d: -f1) || true
       PYTHON_BIN="$PYTHON_PREFIX/bin/python"
 
       # Only install into pyenv-managed versions, never the system Python
