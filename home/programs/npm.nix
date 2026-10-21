@@ -2,9 +2,19 @@
 
 let
   npmGlobalPackages = [
+    "@expo/ngrok"
+    "@mermaid-js/mermaid-cli"
+    "@railway/cli"
+    "eas-cli"
+    "expo"
     "happy"
+    "marked"
+    "mint"
     "opencode-ai"
+    "puppeteer"
+    "vercel"
     "workos"
+    "zapier-platform-cli"
   ];
 in
 {
@@ -15,7 +25,7 @@ in
       init-author-email=jon@deschutesdesigngroup.com
       init-license=MIT
       save-exact=true
-      allow-scripts=happy,opencode-ai
+      allow-scripts=@railway/cli,happy,opencode-ai,puppeteer
     '';
 
     activation.npmGlobalInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''

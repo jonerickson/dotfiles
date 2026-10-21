@@ -24,6 +24,7 @@
       ".composer/composer.json".text = builtins.toJSON {
         "require" = {
           "friendsofphp/php-cs-fixer" = "*";
+          "laravel/forge-cli" = "*";
           "laravel/installer" = "*";
           "laravel/pint" = "*";
           "pestphp/pest" = "*";
@@ -77,7 +78,7 @@
       '';
     };
 
-    activation.composerGlobalInstall = lib.hm.dag.entryAfter [ "writeBoundary" ] ''
+    activation.composerGlobalInstall = lib.hm.dag.entryAfter [ "linkGeneration" ] ''
       echo "Running composer global update...."
       $DRY_RUN_CMD ${pkgs.php.packages.composer}/bin/composer global update --no-interaction || true
     '';
